@@ -59,7 +59,7 @@ router.get('/details/:id', function(req, res, next) {
 
 
 // Create table
-router.get('/createpoststable', (req, res) => {
+router.get('/createjoin', (req, res) => {
     var sql = "SELECT vehicles.vehicle_type, vehicles.vehicle_model,vehicles.sold_kia_model,countries.country_name FROM countries JOIN vehicles ON countries.country_name = vehicles.country_name ORDER BY vehicles.country_name";
     db2.query(sql, (err, result) => {
         if(err) throw err;
