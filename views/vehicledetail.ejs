@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>KIA Busines Research</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  .card {
+
+  margin:5%;
+
+}
+.card:hover {
+  opacity: 0.7;
+
+  z-index: 2;
+}
+
+
+  .img-top{
+  position: relative;
+  margin-top:5%;
+  padding-top:2%;
+  padding-left: 34%;
+  width:800px ;
+  height: auto;
+  
+  
+
+  }
+  /* width */
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 1px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(15, 152, 243); 
+  border-radius: 1px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(4, 48, 77); 
+}
+  .divic {
+  height: 100%;
+  width: 88%;
+  position: absolute;
+  z-index: 1;
+  
+  left: 180px;
+  background-color:rgb(255, 255, 255);
+  overflow:scroll;
+  margin: 0;
+  
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+  .sidenav {
+  height: 250px;
+  width: 120px;
+  position: fixed;
+  z-index: 1;
+  top: 120px;
+  left: 0;
+  background-color:rgb(255, 255, 255);
+  overflow-x: hidden;
+  padding-top: 20px;
+  border-right: 1px solid red;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #000000;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #c92525;
+}
+.sidenav2 {
+  height: 100%;
+  width: 120px;
+  position: fixed;
+  z-index: 2;
+  top: 107px;
+  right: 0;
+  background-color:rgb(255, 255, 255);
+  overflow-x: hidden;
+  padding-top: 20px;
+  border-left: 1px solid red;
+}
+
+.sidenav2  p {
+  position: relative;
+  left:4px;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #0c0404;
+  display: block;
+  border-bottom: 1px solid red;
+}
+
+.sidenav2 p:hover {
+  color: #c92525;
+}
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+.myframe {
+  position:absolute;
+  margin: 0;
+  z-index: 6;
+  left: 330px;
+  top: 60%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  visibility: hidden;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+  .sidenav2 {padding-top: 15px;}
+  .sidenav2 p {font-size: 18px;}
+}
+  </style>
+</head>
+<body onload="mycompetitors()">
+<div class="p-3 mb-2 bg-dark text-light text-center" style="position:relative;z-index: 16;width: 100%;">
+    <img src="/imagescar/kialogo.webp"">
+ 
+  <h5> <%= title%></h5>
+  
+  
+</div>
+<div class="sidenav">
+  <a > <%= note%></a>
+  <a  onclick="mycompetitors()">Competitors</a>
+  <a >Comments</a>
+  <a >Core</a>
+</div>
+
+<div class="divic">
+  <img  class="img-top" src= <%= mex%>  alt="Save Electricity">
+  
+  <div style="padding-left:1%;margin-top:15px;font-size:45px;position:relative;left:0%"> <%= note%> Competitors</div>
+  <hr>
+  <div style="background-color:white;padding:2px;height:45%;">
+    <div style="background-color:white;padding:25px;left:10%;position:absolute;border:1px solid gray;border-radius:10px;" >
+      <img id ="info1-img"   width="200px" height="80"  alt="Save Electricity">
+      <p id ="info1">Brand-Model</p>
+      <p id ="model1">Sales</p>
+      <p id ="sales1">Sales</p>
+      <p id ="price1">Price</p>
+    </div>
+    <div style="background-color:white;padding:25px;left:40%;position:absolute;border:1px solid gray;border-radius:10px;">
+      <img id ="info2-img"   width="220px" height="80" alt="Save Electricity">
+   
+      <p id ="info2">Brand-Model </p>
+      <p id ="model2">Sales</p>
+      <p id ="sales2">Sales</p>
+      <p id ="price2">Price</p>
+      
+    </div>
+    <div style="background-color:white;padding:25px;left:70%;position:absolute;border:1px solid gray;border-radius:10px;" >
+      <img id ="info3-img"   width="200px"  height="80" alt="Save Electricity">
+  
+      <p id ="info3">Brand-Model  </p>
+      <p id ="model3">Sales</p>
+      <p id ="sales3">Sales </p>
+      <p id ="price3">Price  </p>
+    </div>
+
+
+
+
+
+  </div>
+  
+</div>
+
+
+<iframe  class="myframe" id="myvideoframe" width="916" height="515" src="https://www.youtube.com/embed/IdPTuwKEfmA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<script>
+var x = "not" ;
+function showCoords(event) {
+  var x = event.clientX;
+  var y = event.clientY;
+  var coords = "X coords: " + x + ", Y coords: " + y;
+  
+  console.log(coords);
+}
+
+function show(event) {
+  
+  document.getElementById("myvideoframe").style.visibility = "visible";
+  console.log("visible");
+}
+
+function hide(event){
+  document.getElementById("myvideoframe").style.visibility = "hidden";
+  console.log("hidden");
+}
+function mycompetitors() {
+  //window.location.href='/getposts'
+ var getstr = "/getcompetitors/"+ "<%= note%>";
+ console.log(getstr);
+  axios.get(getstr).then(response => {
+  
+      // returning the data here allows the caller to get it through another .then(...)
+      val = response.data
+      document.getElementById("info1").innerHTML = "Manufacturer "+val[0].competitor_one;
+      document.getElementById("info1-img").src = "/imagescar/"+"<%= note%>"+"/"+val[0].competitor_one+".webp";
+      document.getElementById("model1").innerHTML = "Model "+val[0].competitor_one_model ;
+      document.getElementById("sales1").innerHTML = "Sales "+val[0].competitor_one_sales ;
+      document.getElementById("price1").innerHTML ="Price "+ val[0].competitor_one_price ;
+
+      document.getElementById("info2").innerHTML ="Manufacturer "+val[0].competitor_second;
+      document.getElementById("info2-img").src = "/imagescar/"+"<%= note%>"+"/"+val[0].competitor_second+".webp";
+      document.getElementById("model2").innerHTML = "Model "+val[0].competitor_second_model;
+      document.getElementById("sales2").innerHTML = "Sales "+val[0].competitor_second_sales ;
+      document.getElementById("price2").innerHTML = "Price "+val[0].competitor_second_price;
+     
+      
+
+      document.getElementById("info3").innerHTML ="Manufacturer "+ val[0].competitor_third;
+      document.getElementById("info3-img").src = "/imagescar/"+"<%= note%>"+"/"+val[0].competitor_third+".webp";
+      document.getElementById("model3").innerHTML = "Model "+val[0].competitor_third_model ;
+      document.getElementById("sales3").innerHTML = "Sales "+val[0].competitor_third_sales;
+      document.getElementById("price3").innerHTML = "Price "+val[0].competitor_third_price;
+      console.log(response.data)
+  
+  })
+  
+  
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>KIA Busines Research</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+
+  <style>
+  body {
+    background-color: rgb(57, 60, 61)
+}
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  .card {
+
+  margin:5%;
+
+}
+.card:hover {
+  opacity: 0.7;
+
+  z-index: 2;
+}
+
+
+  .card-img-top{
+  
+  
+    position: relative;
+    left: 8%;
+    max-width: 400px;
+    height: auto;
+  }
+  .card-columns {
+   margin-top:90px;
+  }
+  .card-columns .card {
+    background-color: #c7c4bf;
+    display: inline-block;
+    width: 100%;
+}
+  .pin{
+    margin: 2px;
+    padding:2px;
+  }
+  p {
+  background-color: rgb(57, 60, 61);
+  color: white;
+  border: 2px solid black;
+  border-radius: 25px;
+  margin: 5px;
+  padding-left: 25px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+.custom-select{
+  width:150px;
+}
+.container-fluid{
+margin:10px;
+padding:10px;
+background-color:red;
+}
+  </style>
+</head>
+<body onload="myrepeater()" >
+ <div class="container-fluid" style="position: fixed;width:100%;z-index:5;top:5px;">
+  <img src="/imagescar/kialogo.webp">
+
+  <button onclick="mykia()"  class="btn btn-dark" style="margin-left:5px;"> Regions </button>
+  <button onclick="mygetcountries()"  class="btn btn-dark"> Countries </button>
+  <button onclick="mygetcars()"  class="btn btn-dark"> Vehicles </button>
+  
+  <select   id="Countryselector" class="custom-select" name="cars">
+      <option value="all">all</option>
+      <option value="Germany">Germany</option>
+      <option value="USA">USA</option>
+      <option value="South Korea">South Korea</option>
+      <option value="France">France</option>
+    </select> </div>
+
+
+</body>
+<script>
+  function mygo(clicked_name) {
+
+window.location.href = "http://localhost:3000/vdetails/"+clicked_name;
+}
+ function myrepeater() {
+  try {
+        document.getElementById("10").remove();
+       
+        }
+        catch(err) {
+  console.log(err.message);
+}
+try {
+      
+        document.getElementById("cardholder").remove();
+        }
+        catch(err) {
+  console.log(err.message);
+}
+    var s = document.createElement("DIV");
+    s.setAttribute("class","card-columns")
+    s.setAttribute("id","cardholder")
+    document.body.appendChild(s);
+   var country_select = document.getElementById("Countryselector").value
+    axios.get("/getcars/all").then(response => {
+  
+  // returning the data here allows the caller to get it through another .then(...)
+    val = response.data
+  for (var i = 0; i < val.length; i++) {
+    console.log( i + "...>"+val[i].vehicle_model)
+    var y = document.createElement("DIV");
+    
+    y.setAttribute("class","card")
+    y.setAttribute("id",i)
+    var x = document.createElement("IMG");
+    x.setAttribute("class","card-img-top")
+    x.setAttribute("src", "/imagescar/"+val[i].vehicle_model+".webp");
+    x.setAttribute("name", val[i].vehicle_model);
+    x.setAttribute("id", "img"+i);
+    x.setAttribute("onclick","mygo(this.name)");
+    x.setAttribute("width", "250px");
+    x.setAttribute("height", "250px");
+    x.setAttribute("alt", "The Pulpit Rock");
+    var country_name= document.createElement("P");
+    country_name.setAttribute("id",i+"pl");
+    country_name.innerHTML = " Country: " + val[i].country_name;
+    var cartypes= document.createElement("P");
+    cartypes.setAttribute("id",i+"pl");
+    cartypes.innerHTML = " Segment: " + val[i].vehicle_type;
+    var carmodel= document.createElement("P");
+    carmodel.setAttribute("id",i+"pl");
+    carmodel.innerHTML = " Model: "+ val[i].vehicle_model;
+    var carpreis= document.createElement("P");
+    carpreis.setAttribute("id",i+"pl");
+    carpreis.innerHTML =" Price: " + val[i].vehicle_preis;
+    var soldcar= document.createElement("P");
+    soldcar.setAttribute("id",i+"pl");
+    soldcar.innerHTML =" Sales: " + val[i].sold_kia_model;
+    document.getElementById("cardholder").appendChild(y);
+    document.getElementById(i).appendChild(x);
+    document.getElementById(i).appendChild(country_name);
+    document.getElementById(i).appendChild(cartypes);
+    document.getElementById(i).appendChild(carmodel);
+    document.getElementById(i).appendChild(carpreis);
+    document.getElementById(i).appendChild(soldcar);
+  }
+ 
+})
+
+
+
+ }
+  
+  function mykia() {
+  //window.location.href='/getposts'
+ 
+  axios.get("/createpoststable").then(response => {
+  
+      // returning the data here allows the caller to get it through another .then(...)
+      val = response.data
+  
+      console.log(response.data)
+  
+  })
+  
+  
+  }
+  function mygetcountries() {
+    var y = document.createElement("DIV");
+    try {
+        document.getElementById("10").remove();
+        
+        }
+        catch(err) {
+  console.log(err.message);
+}
+try {
+        
+        document.getElementById("cardholder").remove();
+        }
+        catch(err) {
+  console.log(err.message);
+}
+var s = document.createElement("DIV");
+    s.setAttribute("class","card-columns")
+    s.setAttribute("id","cardholder")
+    document.body.appendChild(s);
+    y.setAttribute("class","card")
+    y.setAttribute("id",10)
+    axios.get("/getcountry").then(response => {
+  
+  // returning the data here allows the caller to get it through another .then(...)
+  val = response.data
+  
+  console.log(response.data)
+  for (var i = 0; i < val.length; i++) {
+    console.log( i + "...>"+val[i].country_name)
+
+    var cartypes= document.createElement("P");
+    cartypes.setAttribute("id",i+"pl");
+    cartypes.innerHTML = val[i].country_name;
+    document.body.appendChild(y);
+    document.getElementById("10").appendChild(cartypes);
+  }
+
+})
+  }
+  
+  function mygetcars() {
+    try {
+        document.getElementById("10").remove();
+       
+        }
+        catch(err) {
+  console.log(err.message);
+}
+try {
+      
+        document.getElementById("cardholder").remove();
+        }
+        catch(err) {
+  console.log(err.message);
+}
+    var s = document.createElement("DIV");
+    s.setAttribute("class","card-columns")
+    s.setAttribute("id","cardholder")
+    document.body.appendChild(s);
+   var country_select = document.getElementById("Countryselector").value
+    axios.get("/getcars/"+country_select).then(response => {
+  
+  // returning the data here allows the caller to get it through another .then(...)
+    val = response.data
+  for (var i = 0; i < val.length; i++) {
+    console.log( i + "...>"+val[i].vehicle_model)
+    var y = document.createElement("DIV");
+    
+    y.setAttribute("class","card")
+    y.setAttribute("id",i)
+    var x = document.createElement("IMG");
+    x.setAttribute("class","card-img-top")
+    x.setAttribute("src", "/imagescar/"+val[i].vehicle_model+".webp");
+    x.setAttribute("name", val[i].vehicle_model);
+    x.setAttribute("id", "img"+i);
+    x.setAttribute("onclick","mygo(this.name)");
+    x.setAttribute("width", "250px");
+    x.setAttribute("height", "250px");
+    x.setAttribute("alt", "The Pulpit Rock");
+    var country_name= document.createElement("P");
+    country_name.setAttribute("id",i+"pl");
+    country_name.innerHTML = " Country: " + val[i].country_name;
+    var cartypes= document.createElement("P");
+    cartypes.setAttribute("id",i+"pl");
+    cartypes.innerHTML = " Segment: " + val[i].vehicle_type;
+    var carmodel= document.createElement("P");
+    carmodel.setAttribute("id",i+"pl");
+    carmodel.innerHTML = " Model: "+ val[i].vehicle_model;
+    var carpreis= document.createElement("P");
+    carpreis.setAttribute("id",i+"pl");
+    carpreis.innerHTML =" price: " + val[i].vehicle_preis;
+    var soldcar= document.createElement("P");
+    soldcar.setAttribute("id",i+"pl");
+    soldcar.innerHTML =" sales: " + val[i].sold_kia_model;
+    
+    document.getElementById("cardholder").appendChild(y);
+    document.getElementById(i).appendChild(x);
+    document.getElementById(i).appendChild(country_name);
+    document.getElementById(i).appendChild(cartypes);
+    document.getElementById(i).appendChild(carmodel);
+    document.getElementById(i).appendChild(carpreis);
+    document.getElementById(i).appendChild(soldcar);
+  }
+ 
+})
+
+
+
+}
+  
+  
+  </script>
+</html>
