@@ -1,9 +1,11 @@
-# my_ihc
-ihavecuriosity
+# kiabusinessresearch
+Kia Show 
 Source Website:
   - Bootstrap:
   - Express:
-  - Node:
+  - Node.js
+  - EJS Web Template 
+  - Images from car companies websites 
 
 DATABASE STRUCTURE
 ![DBStructure](public/images/DBStructure.png)
