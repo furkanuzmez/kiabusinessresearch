@@ -1,18 +1,20 @@
 # kiabusinessresearch
 Kia Test App 
 
-My aim is just show fundamental process with combining frontend,backend and database communication.
+My aim is just to show the fundamental process by combining frontend, backend, and database communication.
+
+Youtube Link: Working Project  on Local Host
+ https://www.youtube.com/watch?v=5Pezcnm82YM&feature=youtu.be
 
 Source Website:
-  - Bootstrap:
-  - Express:
-  - Node.js
+  - Bootstrap: Styling 
+  - Express: Backend 
+  - Node.js: 
   - EJS Web Template 
   - Images from car companies websites 
 
-!!!!!
-I have combined the other first 3 brands and their models in the competitor table, normally creating a separate brand with the vehicle model table is a more accurate arrangement.
-My aim is just show fundamental process with combining frontend,backend and database communication.
+
+
 
 Sql Queries , 
 
@@ -33,6 +35,10 @@ router.get('/createjoin', (req, res) => {
         res.send(result);
     });
 });
+
+!!!!!
+I have combined the other first 3 brands and their models in the competitor table, normally creating a separate brand with the vehicle model table is a more accurate arrangement.
+
 
 DATABASE STRUCTURE
 ![DBStructure](public/images/DBStructure.png)
